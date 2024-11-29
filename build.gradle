@@ -1,0 +1,58 @@
+buildscript {
+    ext {
+        springBootVersion = '3.2.1'
+        lombokVersion = '1.18.26'
+        mybatisVersion = '3.0.3'
+        junitVersion = '5.10.0'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'war'
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group 'com.franc'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    runtimeClasspath {
+        extendsFrom developmentOnly // Devtools 설정
+    }
+    compileOnly {
+        extendsFrom annotationProcessor // Lombok 설정
+    }
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.h2database:h2'
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation"org.junit.jupiter:junit-jupiter:$junitVersion"
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+}
+
+
+test {
+    useJUnitPlatform()
+}
