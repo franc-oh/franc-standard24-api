@@ -2,11 +2,10 @@ package com.franc.domain.account.controller;
 
 import com.franc.domain.account.dto.AccountGetDTO;
 import com.franc.domain.account.service.AccountFacade;
+import com.franc.global.common.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,12 +37,12 @@ public class AccountController {
      * @throws Exception
      */
     @GetMapping("/v1.0/{accountId}")
-    public ResponseEntity<?> getAccount(
+    public ApiResponse<?> getAccount(
             @PathVariable("accountId") Long accountId) throws Exception {
 
         AccountGetDTO.Response response = accountFacade.getAccount(accountId);
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return ApiResponse.ok(response);
     }
 
 

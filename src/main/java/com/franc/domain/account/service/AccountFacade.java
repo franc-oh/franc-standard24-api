@@ -2,6 +2,8 @@ package com.franc.domain.account.service;
 
 import com.franc.domain.account.domain.Account;
 import com.franc.domain.account.dto.AccountGetDTO;
+import com.franc.global.error.BizException;
+import com.franc.global.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +34,8 @@ public class AccountFacade {
         // #1. 사용자 조회
         Account account = Optional.ofNullable(accountService.findAccount(accountId))
                 .orElseGet(Account::new);
+
+        if(1==1) throw new BizException(ErrorCode.TEST_ERROR);
 
         return AccountGetDTO.Response.from(account);
     }
