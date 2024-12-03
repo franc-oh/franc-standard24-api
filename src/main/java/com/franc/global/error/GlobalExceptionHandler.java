@@ -2,9 +2,13 @@ package com.franc.global.error;
 
 import com.franc.domain.account.controller.AccountController;
 import com.franc.global.common.ApiResponse;
+import jakarta.validation.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -12,7 +16,21 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    private static final Logger log = LoggerFactory.getLogger(AccountController.class);
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    // 요청 값 유효성 검증에 대한 예외 - @Valid
+    @ExceptionHandler(value = {MethodArgumentNotValidException.class})
+    public ApiResponse<?> handleMethodArgmentNotValidExceptionHandler(MethodArgumentNotValidException e, BindingResult valid) {
+        log.error("GlobalExceptionHandler catch MethodArgmentNotValidExceptionHandler : {}", e.getMessage());
+        return ApiResponse.fail(new BizException(ErrorCode.REQUEST_ARGUMENT_NOT_VALID));
+    }
+
+    // 요청 값 유효성 검증에 대한 예외 - @Validate
+    @ExceptionHandler(value = {ConstraintViolationException.class})
+    public ApiResponse<?> handleMethodConstraintViolationExceptionHandler(ConstraintViolationException e) {
+        log.error("GlobalExceptionHandler catch MethodConstraintViolationExceptionHandler : {}", e.getMessage());
+        return ApiResponse.fail(new BizException(ErrorCode.REQUEST_ARGUMENT_NOT_VALID));
+    }
 
     // 존재하지 않는 요청에 대한 예외
     @ExceptionHandler(value = {NoHandlerFoundException.class, HttpRequestMethodNotSupportedException.class})
@@ -24,8 +42,8 @@ public class GlobalExceptionHandler {
 
     // 커스텀 예외
     @ExceptionHandler(value = {BizException.class})
-    public ApiResponse<?> handleCustomException(BizException e) {
-        log.error("handleCustomException() in GlobalExceptionHandler throw CustomException : {}", e.getMessage());
+    public ApiResponse<?> handleBizException(BizException e) {
+        log.error("handleBizException() in GlobalExceptionHandler throw BizException : {}", e.getMessage());
         return ApiResponse.fail(e);
     }
 

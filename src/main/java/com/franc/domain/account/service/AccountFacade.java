@@ -35,8 +35,6 @@ public class AccountFacade {
         Account account = Optional.ofNullable(accountService.findAccount(accountId))
                 .orElseGet(Account::new);
 
-        if(1==1) throw new BizException(ErrorCode.TEST_ERROR);
-
         return AccountGetDTO.Response.from(account);
     }
 }

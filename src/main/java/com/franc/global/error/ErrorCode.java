@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
     // Test Error
     TEST_ERROR(10000, HttpStatus.BAD_REQUEST, "임의 에러입니다."),
+    REQUEST_ARGUMENT_NOT_VALID(10001, HttpStatus.BAD_REQUEST, "잘못된 요청 양식입니다."),
     // 404 Not Found
     NOT_FOUND_END_POINT(40400, HttpStatus.NOT_FOUND, "존재하지 않는 API입니다."),
     // 500 Internal Server Error
