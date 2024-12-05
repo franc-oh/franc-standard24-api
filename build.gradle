@@ -20,6 +20,9 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = '17'
 
 configurations {
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
     runtimeClasspath {
         extendsFrom developmentOnly // Devtools 설정
     }
@@ -37,6 +40,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'

@@ -15,14 +15,11 @@ public record AccountSaveDTO() {
 
     /**
      * Request
-     * @param accountId
      * @param name
      * @param email
      * @param age
      */
     public record Request(
-
-            Long accountId,
             @NotBlank
             String name,
             @Email
@@ -30,17 +27,6 @@ public record AccountSaveDTO() {
             @Min(19)
             Integer age
     ) {
-
-        // DTO -> Entity
-        public static Account toEntity(AccountSaveDTO.Request request) {
-            if(Objects.isNull(request)) return new Account();
-            return new Account(
-                    request.accountId(),
-                    request.name(),
-                    request.email(),
-                    request.age()
-            );
-        }
 
     }
 }

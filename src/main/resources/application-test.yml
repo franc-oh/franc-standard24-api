@@ -5,3 +5,22 @@ spring:
   config:
     activate:
       on-profile: "test"
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        boot:
+          autoconfigure: ERROR
+    com:
+      zaxxer:
+        hikari:
+          pool:
+            HikariPool: INFO
+    jdbc:
+      sqlonly: OFF
+      sqltiming: INFO
+      resultsettable: INFO
+      audit: OFF
+      resultset: OFF
+      connection: OFF
