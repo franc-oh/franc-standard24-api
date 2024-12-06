@@ -9,10 +9,11 @@ spring:
       on-profile: "test"
 
   datasource:
-    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:h2:mem:accountdb;MODE=MySQL;DB_CLOSE_DELAY=-1
-    username: account
-    password: account1234
+    hikari:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:h2:mem:accountdb;MODE=MySQL;DB_CLOSE_DELAY=-1
+      username: account
+      password: account1234
 
   h2:
     console:

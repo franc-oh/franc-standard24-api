@@ -2,6 +2,7 @@ package com.franc.domain.account.dto;
 
 import com.franc.domain.account.domain.Account;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -10,37 +11,32 @@ import java.util.Objects;
 public record AccountGetDTO() {
 
     /**
-     * Response
+     * 응답문
      * @param accountId
      * @param name
+     * @param status
      * @param email
-     * @param age
+     * @param vipYn
+     * @param joinDt
      */
     public record Response(Long accountId,
                            String name,
+                           String status,
                            String email,
-                           Integer age) {
+                           Boolean vipYn,
+                           LocalDateTime joinDt) {
 
+        // VO -> DTO
+        public static AccountGetDTO.Response fromEntity(Account account) {
+            if(Objects.isNull(account) || Objects.isNull(account.getAccountId())) return null;
 
-        // 빈 객체
-        private static AccountGetDTO.Response empty(){
-            return new AccountGetDTO.Response(null, null, null, null);
-        }
-
-        // 필드값 -> DTO
-        public static AccountGetDTO.Response of(Long id, String name, String email, int age) {
-            if(Objects.isNull(id)) return empty();
-            return new AccountGetDTO.Response(id, name, email, age);
-        }
-
-        // Entity -> DTO
-        public static AccountGetDTO.Response from(Account account) {
-            if(Objects.isNull(account)) return empty();
             return new AccountGetDTO.Response(
                     account.getAccountId(),
                     account.getName(),
+                    account.getStatus(),
                     account.getEmail(),
-                    account.getAge()
+                    account.getVipYn(),
+                    account.getInsertDate()
             );
         }
 

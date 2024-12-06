@@ -33,8 +33,9 @@ public class AccountFacade {
 
         // #1. 사용자 조회
         Account account = Optional.ofNullable(accountService.findAccount(accountId))
-                .orElseGet(Account::new);
+                .orElseThrow(() -> new BizException(ErrorCode.ACCOUNT_NOT_FOUND)); // 사용자를 찾을 수 없습니다.
 
-        return AccountGetDTO.Response.from(account);
+            return AccountGetDTO.Response.fromEntity(account);
+
     }
 }
