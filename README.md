@@ -8,6 +8,7 @@
 - Mybatis
 - Gradle 8.4
 
+<br/>
 
 ## 🔧 기능
 ### Global
@@ -28,7 +29,7 @@
    - 각 계층별 책임 및 비즈니스 로직 구현 예시
    - Domain, DTO
 
+<br/>
 
-## ❗안내사항
-- 서비스 구동 시 프로파일 설정
-  - `-Dspring.profiles.active=test`
+## 📌 서비스 설명
+> 프로파일 : `test`
