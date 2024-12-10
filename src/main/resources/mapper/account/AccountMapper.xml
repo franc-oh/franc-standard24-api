@@ -4,12 +4,32 @@
 
 <mapper namespace="com.franc.domain.account.dao.AccountDAO">
 
-    <select id="findById" parameterType="Long" resultType="com.franc.domain.account.domain.Account">
-        /** AccountMapper.findById */
+    <sql id="findAllColumn">
         SELECT A.*
         FROM ACCOUNT A
+    </sql>
+    <select id="findById" parameterType="Long" resultType="com.franc.domain.account.domain.Account">
+        /** AccountMapper.findById */
+        <include refid="findAllColumn" />
         WHERE A.ACCOUNT_ID = #{accountId}
     </select>
+
+    <select id="findByEmail" parameterType="String" resultType="com.franc.domain.account.domain.Account">
+        /** AccountMapper.findByEmail */
+        <include refid="findAllColumn" />
+        WHERE A.EMAIL = #{email}
+    </select>
+
+    <insert id="save" parameterType="com.franc.domain.account.domain.Account">
+        /** AccountMapper.save */
+        INSERT INTO ACCOUNT(
+        NAME, EMAIL, INSERT_USER)
+        VALUES(
+            #{name},
+            #{email},
+            #{insertUser}
+        )
+    </insert>
 
 </mapper>
 

@@ -58,7 +58,7 @@ public class AccountController {
     @PostMapping("/v1.0")
     public ApiResponse<?> saveAccount(@RequestBody @Valid AccountSaveDTO.Request request) throws Exception {
 
-        logger.info("Request : {}", request); // 유효성 성공 시 출력
+        accountFacade.saveAccount(request);
 
         return ApiResponse.ok("ok");
     }

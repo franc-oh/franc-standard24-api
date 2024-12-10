@@ -17,14 +17,14 @@ public record AccountGetDTO() {
      * @param status
      * @param email
      * @param vipYn
-     * @param joinDt
+     * @param joinDate
      */
     public record Response(Long accountId,
                            String name,
                            String status,
                            String email,
                            Boolean vipYn,
-                           LocalDateTime joinDt) {
+                           LocalDateTime joinDate) {
 
         // VO -> DTO
         public static AccountGetDTO.Response fromEntity(Account account) {

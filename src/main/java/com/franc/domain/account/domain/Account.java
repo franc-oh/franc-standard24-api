@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = {"accountId"})
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Account {
     private Long accountId;
     private String name;

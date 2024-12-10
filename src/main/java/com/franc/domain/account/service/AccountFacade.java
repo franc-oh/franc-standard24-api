@@ -2,6 +2,8 @@ package com.franc.domain.account.service;
 
 import com.franc.domain.account.domain.Account;
 import com.franc.domain.account.dto.AccountGetDTO;
+import com.franc.domain.account.dto.AccountSaveDTO;
+import com.franc.global.error.BizException;
 import com.franc.global.error.ErrorCode;
 import com.franc.global.util.FrancUtil;
 import lombok.RequiredArgsConstructor;
@@ -35,5 +37,20 @@ public class AccountFacade {
 
         return AccountGetDTO.Response.fromEntity(account);
 
+    }
+
+    /**
+     * 사용자 등록
+     * @param request
+     * @throws Exception
+     */
+    public void saveAccount(AccountSaveDTO.Request request) throws Exception {
+
+        // #1. 이미 사용자가 있는지?
+        if(FrancUtil.isNotNull(accountService.findAccountByEmail(request.email()))) {
+            throw new BizException(ErrorCode.ACCOUNT_EXISTS);
+        }
+
+        accountService.saveAccount(AccountSaveDTO.Request.toEntity(request));
     }
 }

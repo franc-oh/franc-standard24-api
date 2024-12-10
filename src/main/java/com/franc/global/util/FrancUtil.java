@@ -8,7 +8,18 @@ import java.util.Objects;
 public class FrancUtil<T> {
 
     /**
-     * Null 체크
+     * Null인지?
+     * @param t
+     * @return
+     * @param <T>
+     */
+    public static <T> boolean isNull(T t) {
+        if(Objects.isNull(t)) return true;
+        return false;
+    }
+
+    /**
+     * Null이 아닌지?
      * @param t
      * @return
      * @param <T>
