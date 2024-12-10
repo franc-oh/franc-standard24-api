@@ -1,11 +1,9 @@
 package com.franc.global.error;
 
-import com.franc.domain.account.controller.AccountController;
 import com.franc.global.common.ApiResponse;
 import jakarta.validation.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -21,7 +19,7 @@ public class GlobalExceptionHandler {
     // 요청 값 유효성 검증에 대한 예외 - @Valid
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     public ApiResponse<?> handleMethodArgmentNotValidExceptionHandler(MethodArgumentNotValidException e, BindingResult valid) {
-        log.error("GlobalExceptionHandler catch MethodArgmentNotValidExceptionHandler : {}", e.getMessage());
+        log.error("GlobalExceptionHandler catch MethodArgmentNotValidExceptionHandler : {}", valid.getFieldError().getDefaultMessage());
         return ApiResponse.fail(new BizException(ErrorCode.REQUEST_ARGUMENT_NOT_VALID));
     }
 
@@ -43,7 +41,7 @@ public class GlobalExceptionHandler {
     // 커스텀 예외
     @ExceptionHandler(value = {BizException.class})
     public ApiResponse<?> handleBizException(BizException e) {
-        log.error("handleBizException() in GlobalExceptionHandler throw BizException : {}", e.getMessage());
+        log.error("handleBizException() in GlobalExceptionHandler throw BizException : {}", e.getErrorCode().getMessage());
         return ApiResponse.fail(e);
     }
 

@@ -2,14 +2,12 @@ package com.franc.domain.account.service;
 
 import com.franc.domain.account.domain.Account;
 import com.franc.domain.account.dto.AccountGetDTO;
-import com.franc.global.error.BizException;
 import com.franc.global.error.ErrorCode;
+import com.franc.global.util.FrancUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 /**
  * [사용자] Facade (Controller > Facade > Service > Dao)
@@ -32,10 +30,10 @@ public class AccountFacade {
     public AccountGetDTO.Response getAccount(Long accountId) throws Exception {
 
         // #1. 사용자 조회
-        Account account = Optional.ofNullable(accountService.findAccount(accountId))
-                .orElseThrow(() -> new BizException(ErrorCode.ACCOUNT_NOT_FOUND)); // 사용자를 찾을 수 없습니다.
+        Account account = FrancUtil.isNullThrowBizException(
+                accountService.findAccount(accountId), ErrorCode.ACCOUNT_NOT_FOUND);
 
-            return AccountGetDTO.Response.fromEntity(account);
+        return AccountGetDTO.Response.fromEntity(account);
 
     }
 }

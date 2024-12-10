@@ -1,12 +1,10 @@
 package com.franc.domain.account.dto;
 
-import com.franc.domain.account.domain.Account;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
-import java.util.Objects;
+import java.time.LocalDateTime;
 
 /**
  * DTO - 사용자등록
@@ -25,7 +23,8 @@ public record AccountSaveDTO() {
             @Email
             String email,
             @Min(19)
-            Integer age
+            Integer age,
+            LocalDateTime dt
     ) {
 
     }
