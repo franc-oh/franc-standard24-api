@@ -27,5 +27,6 @@ public class ObjectMapperConfig {
             jacksonObjectMapperBuilder.deserializers(new LocalDateDeserializer(DateTimeFormatter.ofPattern(dateFormat)));
             jacksonObjectMapperBuilder.deserializers(new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(datetimeFormat)));
         };
+
     }
 }

@@ -47,4 +47,5 @@ public class DataSourceConfig {
     public SqlSessionTemplate sessionTemplate(SqlSessionFactory sessionFactory) throws Exception{
         return new SqlSessionTemplate(sessionFactory);
     }
+
 }
